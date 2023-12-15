@@ -1,0 +1,74 @@
+1. Frontend:
+• Layout: Using semantic HTML and CSS to build the user interface.
+• Interactivity: Using JavaScript to create dynamic UI elements, event handling, and user
+interaction.
+• Adaptability: Competent adaptation of the interface to different devices and screen sizes.
+Comment:
+It is not necessary to create a full-fledged web page. Since the course is aimed at studying
+the backend part, you don’t have to focus on the frontend. Create a basic web page to interact with
+the back part. You can even use a template from the Internet.
+2. Backend:
+• Request processing: Correct processing of HTTP requests (GET, POST, PUT, DELETE)
+on the server side.
+• Asynchronous processing: Using asynchronous methods such as Promises or async/await
+to process requests efficiently.
+• RESTful API Implementation: Create an efficient and well-designed RESTful API,
+including endpoints, request processing, and returning data in a usable format.
+Comment:
+Ensure that your server can correctly handle different types of HTTP requests, such as
+GET, POST, PUT, and DELETE. Verify that request processing is performed efficiently and in
+accordance with the requirements of your application.
+Use asynchronous methods such as Promises or async/await to ensure efficient request
+processing. This will help avoid blocking and improve your backend performance.
+3. Database:
+• Using the MongoDB driver to interact with the database.
+• Implementation of basic operations (CRUD) for working with data in MongoDB.
+Comment:
+Verify that connecting to MongoDB is successful. Use the official MongoDB driver for
+Node.js, for example 'mongodb'. Make sure your backend can successfully interact with the
+database and perform basic CRUD operations.
+4. Security:
+• Injection protection: Taking measures to prevent injections and ensure the safety of queries
+to MongoDB.
+• Authentication and Authorization: Configure user accounts and their rights in MongoDB
+to ensure secure access.
+Comment:
+MongoDB is protected against SQL injections, but it is important to check for and prevent
+other types of injections, such as NoSQL injections.
+Be sure to check and filter input data to prevent possible attacks.
+Properly configure MongoDB authentication using unique accounts for the application.
+Limit database access rights to the minimum required privileges.
+5. Error Handling:
+• Error handling on front-end and back-end: Correct error tracking and handling to prevent
+application failures.
+• Error handling when interacting with MongoDB: Provision of error handling mechanisms
+when performing operations with the MongoDB database.
+Comment:
+Implement error handling mechanisms on the backend. This includes logging errors,
+preventing information leaks, and returning readable and understandable error messages to the
+client to facilitate diagnostics.
+Develop a strategy for handling errors when interacting with MongoDB. This includes
+checking for a database connection, handling query errors, and ensuring readable error messages
+are returned to the client.
+6. Testing:
+• Unit Testing: Writing unit tests for the functions and components of your application.
+• Unit testing MongoDB queries: Writing tests to verify the correctness of queries to
+MongoDB.
+• Integration testing: Testing the interaction of different parts of the application. Testing how
+your application interacts with MongoDB.
+Comment:
+Don't forget to test your backend. Write unit tests for your features and integration tests to
+check how different components interact.
+This will help identify potential problems early in development.
+Write unit tests for your MongoDB queries to ensure they are correct and as expected.
+Run integration tests to test how your application interacts with MongoDB. Ensure that
+CRUD operations work consistently and without errors.
+7. Deployment:
+• -Deployment: Successfully deployed the application to the server.
+• -Server Configuration: Configure the server based on security and application
+performance.
+Comment:
+In preparation for implementation, ensure that the server is properly configured, has
+sufficient resources, and is secure.
+Regularly update dependencies and monitor application performance during the
+implementation process.
