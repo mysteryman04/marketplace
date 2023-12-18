@@ -1,14 +1,13 @@
 const express = require('express');
 const mongoose=require('mongoose');
-const Market=require('./models/market');
 const marketRoutes=require('./routes/market-routes');
 
 const PORT = 3000;
-const URL = 'mongodb://localhost:27017/FinalBackEnd';
+const URL = 'mongodb+srv://mystery_dev:T2i0m0a4@cluster0.liwzter.mongodb.net/FinalBackEnd?retryWrites=true&w=majority';
 
 const app = express();
 app.use(express. json());
-app.use(marketRoutes);
+
 
 mongoose
     .connect(URL)
@@ -20,3 +19,4 @@ app.listen(PORT, (err) => {
     err ? console.log(err) : console.log(`Listening port ${PORT}`);
 });
 
+app.use(marketRoutes);
