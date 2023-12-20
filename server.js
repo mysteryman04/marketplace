@@ -15,8 +15,8 @@ mongoose
     .catch((err)=> console.log(`DB connection error: ${err}`));
 
 
-app.listen(PORT, (err) => {
-    err ? console.log(err) : console.log(`Listening port ${PORT}`);
-});
 
+app.listen(PORT, '0.0.0.0', (err) => {
+    err ? console.log(err) : console.log(`Listening on port ${PORT}`);
+});
 app.use(marketRoutes);
