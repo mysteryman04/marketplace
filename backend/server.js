@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const marketRoutes=require('./routes/market-routes');
 
 const PORT = 3000;
-const URL = 'mongodb+srv://mystery_dev:T2i0m0a4@cluster0.liwzter.mongodb.net/FinalBackEnd?retryWrites=true&w=majority';
+const URL = 'mongodb+srv://mystery_dev:backend123@cluster0.liwzter.mongodb.net/FinalBackEnd?retryWrites=true&w=majority';
 
 const app = express();
 app.use(express. json());
