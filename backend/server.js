@@ -18,22 +18,38 @@ mongoose
     .catch((err) => console.log(`DB connection error: ${err}`));
 
 // Swagger options
-const swaggerOptions = {
-    swaggerDefinition: {
+const options = {
+    definition: {
+        openapi: "3.0.0",
         info: {
-            title: 'User API',
-            version: '1.0.0',
-            description: 'API documentation for the User application',
+            title: "e-commerce app",
+            version: "0.1.0",
+            description:
+                "This is a simple ecommerce application made with Express and documented with Swagger",
+            license: {
+                name: "AITU",
+                url: "https://spdx.org/licenses/MIT.html",
+            },
+            contact: {
+                name: "e-commerce app",
+                email: "nurluhankakpan@gmail.com",
+            },
         },
+        servers: [
+            {
+                url: "http://localhost:3000/",
+            },
+        ],
     },
-    apis: ['./routes/*.js'],
+    apis: ["./routes/*.js"],
 };
 
-const swaggerSpec = swaggerJsdoc(swaggerOptions);
-
-// Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+const specs = swaggerJsdoc(options);
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(specs)
+);
 // Routes
 app.use(userRoutes);
 
