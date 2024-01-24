@@ -2,11 +2,12 @@
 const UserModel = require('../models/userModel');
 
 const getAllUsers = async () => {
-    // Implement logic to get all users
+    return UserModel.find();
 };
 
 const getUserById = async (userId) => {
-    // Implement logic to get a user by ID
+    const user = await UserModel.findById(userId);
+    return UserModel.findById(userId);
 };
 
 const createUser = async (userData) => {
@@ -15,11 +16,14 @@ const createUser = async (userData) => {
 };
 
 const updateUserById = async (userId, userData) => {
-    // Implement logic to update a user by ID
+    const user = await UserModel.findById(userId);
+    user.name = userData.name;
+    user.password = userData.password;
+    return user.save();
 };
 
 const deleteUserById = async (userId) => {
-    // Implement logic to delete a user by ID
+    return UserModel.findByIdAndDelete(userId);
 };
 
 module.exports = {
