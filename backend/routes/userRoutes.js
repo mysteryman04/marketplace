@@ -7,7 +7,6 @@
  *     Users:
  *       type: object
  *       required:
- *         - _id
  *         - username
  *         - password
  *       properties:
@@ -49,6 +48,25 @@
  *     responses:
  *       200:
  *         description: The created user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Users'
+ *       500:
+ *         description: Some server error
+ * /login:
+ *    post:
+ *     summary: Login a user with username and password
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Users'
+ *     responses:
+ *       200:
+ *         description: The logined user.
  *         content:
  *           application/json:
  *             schema:
@@ -135,5 +153,7 @@ router.post('/user', userController.createUser);
 router.put('/user/:id', userController.updateUserById);
 
 router.delete('/user/:id', userController.deleteUserById);
+
+router.post('/login', userController.createUser);
 
 module.exports = router;
