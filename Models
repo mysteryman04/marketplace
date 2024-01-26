@@ -1,0 +1,10 @@
+Models
+Product : {
+ObjectId categoryId => foreign key Category 
+object Price = > {
+  Amount : Number,
+  Currency : String = > enum (KZT,USD,EUR)   
+},
+ObjectId UserId => foreign key Users,
+string Image => image url
+}
