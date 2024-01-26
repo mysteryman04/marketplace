@@ -7,4 +7,5 @@ object Price = > {
 },
 ObjectId UserId => foreign key Users,
 string Image => image url
+Status => (новый,б/у)
 }
