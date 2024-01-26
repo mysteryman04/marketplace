@@ -1,5 +1,3 @@
-// routes/userRoutes.js
-
 /**
  * @swagger
  * components:
@@ -16,7 +14,22 @@
  *         password:
  *           type: string
  *           description: The password of User
- *
+ *     Response:
+ *       type: object
+ *       required:
+ *         - data
+ *         - message
+ *         - status
+ *       properties:
+ *         data:
+ *           type: object
+ *           description: The utils data
+ *         message:
+ *           type: string
+ *           description: The error message
+ *         status:
+ *           type: string
+ *           description: The password of User
  */
 /**
  * @swagger
@@ -51,26 +64,7 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Users'
- *       500:
- *         description: Some server error
- * /login:
- *    post:
- *     summary: Login a user with username and password
- *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Users'
- *     responses:
- *       200:
- *         description: The logined user.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Users'
+ *               $ref: '#/components/schemas/Response'
  *       500:
  *         description: Some server error
  * /user/{id}:
@@ -86,11 +80,11 @@
  *         description: The user id
  *     responses:
  *       200:
- *         description: The user response by id
+ *         description: The user utils by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Users'
+ *               $ref: '#/components/schemas/Response'
  *       404:
  *         description: The user was not found
  *   put:
@@ -115,7 +109,7 @@
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Users'
+ *              $ref: '#/components/schemas/Response'
  *      404:
  *        description: The user was not found
  *      500:
@@ -153,7 +147,5 @@ router.post('/user', userController.createUser);
 router.put('/user/:id', userController.updateUserById);
 
 router.delete('/user/:id', userController.deleteUserById);
-
-router.post('/login', userController.createUser);
 
 module.exports = router;

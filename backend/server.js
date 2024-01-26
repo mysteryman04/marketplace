@@ -1,10 +1,9 @@
-// index.js
 const express = require('express');
 const mongoose = require('mongoose');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const userRoutes = require('./routes/userRoutes');
-
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 const PORT = 3000;
 
@@ -52,6 +51,7 @@ app.use(
 );
 // Routes
 app.use(userRoutes);
+app.use(authRoutes);
 
 app.listen(PORT, '0.0.0.0', (err) => {
     err ? console.log(err) : console.log(`Listening on port ${PORT}`);
