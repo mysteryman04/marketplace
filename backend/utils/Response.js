@@ -8,8 +8,8 @@ class Response{
 function Success(data) {
     return new Response(data,null,true);
 }
-function Error(error) {
-    return new Response(null,error.message,false);
+function Error(message) {
+    return new Response(null,message,false);
 }
 module.exports = {
     Success,

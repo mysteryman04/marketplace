@@ -1,6 +1,9 @@
 const UserModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const enums = require('../enums/enums');
+const env = require('../config/env');
+const constants = require('../constants/constants');
 
 const RegisterUser = async (userData) => {
     const username = userData.username;
@@ -13,6 +16,8 @@ const RegisterUser = async (userData) => {
     const user = new UserModel({
         username: username,
         password: hashedPassword,
+        type: constants.Admins.includes(username) ? enums.UserType.ADMIN : enums.UserType.CONSUMER,
+        image: null,
     });
     return user.save();
 }
@@ -28,7 +33,15 @@ const LoginUser = async (userData) => {
     if (!isPasswordCorrect) {
         throw new Error('Password is incorrect');
     }
-    return jwt.sign({username: username}, "This is an e-commerce app", {expiresIn: '1h'});
+    return jwt.sign({username: username}, env.SECRET_KEY, {expiresIn: '1h'});
+}
+
+const GetProfile = async (username) => {
+    const user = await findUser(username);
+    if (!user) {
+        throw new Error('Username does not exist');
+    }
+    return user;
 }
 
 function findUser(username) {
@@ -38,4 +51,5 @@ function findUser(username) {
 module.exports = {
     RegisterUser,
     LoginUser,
+    GetProfile
 }

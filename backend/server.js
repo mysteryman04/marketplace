@@ -34,6 +34,13 @@ const options = {
                 email: "nurluhankakpan@gmail.com",
             },
         },
+        securityDefinitions: {
+            bearerAuth: {
+                type: 'apiKey',
+                name: 'Authorization',
+                in: 'header',
+            },
+        },
         servers: [
             {
                 url: "http://localhost:3000/",
