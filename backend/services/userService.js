@@ -1,4 +1,3 @@
-// services/userService.js
 const UserModel = require('../models/userModel');
 
 const getAllUsers = async () => {
@@ -6,7 +5,6 @@ const getAllUsers = async () => {
 };
 
 const getUserById = async (userId) => {
-    const user = await UserModel.findById(userId);
     return UserModel.findById(userId);
 };
 
