@@ -9,6 +9,11 @@ const getProductById = async (productId) => {
     return ProductModel.findById(productId);
 };
 
+const getProductByUserId = async (userId) => {
+    const product = await ProductModel.findById(userId);
+    return ProductModel.findById(userId);
+};
+
 const createProduct = async (productData) => {
     const product = new ProductModel(productData);
     return product.save();
@@ -28,6 +33,7 @@ const deleteProductById = async (productId) => {
 module.exports = {
     getAllProducts,
     getProductById,
+    getProductByUserId,
     createProduct,
     updateProductById,
     deleteProductById,

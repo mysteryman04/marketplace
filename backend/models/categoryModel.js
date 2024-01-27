@@ -6,11 +6,10 @@ const subcategorySchema = new mongoose.Schema({
 
 const categorySchema = new mongoose.Schema({
     name: String,
-    subcategories: [subcategorySchema]  /
+    subcategories: [subcategorySchema]
 });
 
 const Category = mongoose.model('Category', categorySchema);
-
 
 const electronicsCategory = new Category({
     name: 'Electronics',
@@ -44,8 +43,5 @@ const booksCategory = new Category({
         { name: 'Biographies' },
     ]
 });
-
-
-const Category = mongoose.model('Categories', categorySchema);
 
 module.exports = Category;
