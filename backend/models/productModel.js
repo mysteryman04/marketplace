@@ -6,19 +6,26 @@ const productSchema = new Schema({
         type: String,
         require: true,
     },
+    description: {
+        type: String,
+        require: false,
+    },
     userId: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true
+        type: mongoose.Schema.Types.ObjectId, ref: 'Users',
+        required: true
     },
     createdData: {
         type: Date,
         require: true,
     },
-    img: {
-        data: Buffer,
-        contentType: String
+    imageUrl: {
+        type: String,
+        require: false,
     },
     categoryId: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true,
     },
     price: {
         amount: Number,
@@ -26,7 +33,11 @@ const productSchema = new Schema({
     },
     reviews: [{
         star: Number,
-        name: String,
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Users',
+            required: true,
+        },
         text: String,
     }],
 });

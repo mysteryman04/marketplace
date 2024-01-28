@@ -6,12 +6,14 @@ const getAllProducts = async () => {
 
 const getProductById = async (productId) => {
     const product = await ProductModel.findById(productId);
-    return ProductModel.findById(productId);
+    if (!product) {
+        throw new Error(`Product ${productId} not found`);
+    }
+    return product;
 };
 
-const getProductByUserId = async (userId) => {
-    const product = await ProductModel.findById(userId);
-    return ProductModel.findById(userId);
+const getProductsByUserId = async (userId) => {
+    return ProductModel.find({ userId: userId });
 };
 
 const createProduct = async (productData) => {
@@ -21,6 +23,9 @@ const createProduct = async (productData) => {
 
 const updateProductById = async (productId, productData) => {
     const product = await ProductModel.findById(productId);
+    if (!product) {
+        throw new Error(`Product ${productId} not found`);
+    }
     product.name = productData.name;
     product.password = productData.password;
     return product.save();
@@ -33,7 +38,7 @@ const deleteProductById = async (productId) => {
 module.exports = {
     getAllProducts,
     getProductById,
-    getProductByUserId,
+    getProductsByUserId,
     createProduct,
     updateProductById,
     deleteProductById,

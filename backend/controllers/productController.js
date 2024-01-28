@@ -1,74 +1,63 @@
-const ProductModel = require('../models/productModel');
-
+const response = require('../utils/response');
+const productServices = require('../services/productService');
 
 async function getAllProducts(req, res) {
     try {
-        const products = await ProductModel.find();
-        res.json(products);
+        const products = await productServices.getAllProducts();
+        res.status(200).json(response.Success(products));
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json(response.Error(error.message));
     }
 }
 
 async function getProductById(req, res) {
     const productId = req.params.productId;
-
     try {
-        const product = await ProductModel.findById(productId);
-        if (!product) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-        res.json(product);
+        const product = await productServices.getProductById(productId);
+        res.status(200).json(response.Success(product));
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json(response.Error(error.message));
     }
 }
 
 async function createProduct(req, res) {
     const productData = req.body;
-
     try {
-        const product = new ProductModel(productData);
-        const savedProduct = await product.save();
-        res.status(201).json(savedProduct);
+        const newProduct = await productServices.createProduct(productData);
+        res.status(201).json(response.Success(newProduct));
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json(response.Error(error.message));
     }
 }
 
 async function updateProductById(req, res) {
     const productId = req.params.productId;
     const productData = req.body;
-
     try {
-        const product = await ProductModel.findById(productId);
-        if (!product) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-
-        // Update product properties
-        product.title = productData.title;
-        product.price = productData.price;
-        // Update other properties as needed
-
-        const updatedProduct = await product.save();
-        res.json(updatedProduct);
+        const updatedProduct = await productServices.updateProductById(productId, productData);
+        res.status(200).json(response.Success(updatedProduct));
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json(response.Error(error.message));
     }
 }
 
 async function deleteProductById(req, res) {
     const productId = req.params.productId;
-
     try {
-        const deletedProduct = await ProductModel.findByIdAndDelete(productId);
-        if (!deletedProduct) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-        res.json(deletedProduct);
+        const deletedProduct = await productServices.deleteProductById(productId);
+        res.status(200).json(response.Success(deletedProduct));
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(200).json(response.Error(error.message));
+    }
+}
+
+async function getProductsByUserId(req, res) {
+    const userId = req.params.userId;
+    try {
+        const products = await productServices.getProductsByUserId(userId);
+        res.status(200).json(response.Success(products));
+    } catch (error) {
+        res.status(200).json(response.Error(error.message));
     }
 }
 
@@ -78,4 +67,5 @@ module.exports = {
     createProduct,
     updateProductById,
     deleteProductById,
+    getProductsByUserId,
 };
