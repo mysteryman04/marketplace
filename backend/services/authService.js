@@ -33,7 +33,7 @@ const LoginUser = async (userData) => {
     if (!isPasswordCorrect) {
         throw new Error('Password is incorrect');
     }
-    return jwt.sign({username: username}, env.SECRET_KEY, {expiresIn: '1h'});
+    return jwt.sign({username: username,type: user.type}, env.SECRET_KEY, {expiresIn: '1h'});
 }
 
 const GetProfile = async (username) => {
