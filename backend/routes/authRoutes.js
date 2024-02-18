@@ -81,8 +81,6 @@
  *   get:
  *     summary: get profile of user
  *     tags: [Authorization/Authentication]
- *     security:
- *       - jwt: []
  *     responses:
  *       200:
  *         description: The created user.
@@ -96,7 +94,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
-const authMiddleware = require('../middleware/authMiddleware');
+const authMiddleware = require('../middleware/AuthMiddleware');
 
 router.post('/register', authController.RegisterUser);
 

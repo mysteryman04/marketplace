@@ -1,5 +1,5 @@
 const authServices = require('../services/authService');
-const response = require('../utils/response');
+const response = require('../utils/Response');
 const e = require("express");
 
 const RegisterUser = async (req, res) => {
@@ -21,7 +21,7 @@ const LoginUser = async (req, res) => {
 }
 const GetProfile = async (req, res) => {
     try {
-        const result = await authServices.GetProfile(req.user);
+        const result = await authServices.GetProfile(req.user.username);
         res.status(200).json(response.Success(result));
     }
     catch (error) {

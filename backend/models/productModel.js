@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
+    id:mongoose.Schema.Types.ObjectId,
     title: {
         type: String,
         require: true,
@@ -15,6 +16,10 @@ const productSchema = new Schema({
         required: true
     },
     createdData: {
+        type: Date,
+        require: true,
+    },
+    updatedData: {
         type: Date,
         require: true,
     },
@@ -32,15 +37,15 @@ const productSchema = new Schema({
         currency: String,
     },
     reviews: [{
-        star: Number,
+        starCount: Number,
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Users',
             required: true,
         },
-        text: String,
+        comment: String,
     }]},
     { versionKey: false});
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Products', productSchema);
 module.exports = Product;

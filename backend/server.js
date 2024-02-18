@@ -4,6 +4,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
 const app = express();
 const PORT = 3000;
 
@@ -34,13 +35,17 @@ const options = {
                 email: "nurluhankakpan@gmail.com",
             },
         },
-        securityDefinitions: {
-            bearerAuth: {
-                type: 'apiKey',
-                name: 'Authorization',
-                in: 'header',
-            },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    in: "header",
+                    bearerFormat: 'JWT',
+                }
+            }
         },
+        security: [{ bearerAuth: [] }],
         servers: [
             {
                 url: "http://localhost:3000/",
@@ -59,6 +64,7 @@ app.use(
 // Routes
 app.use(userRoutes);
 app.use(authRoutes);
+app.use(productRoutes);
 
 app.listen(PORT, '0.0.0.0', (err) => {
     err ? console.log(err) : console.log(`Listening on port ${PORT}`);
