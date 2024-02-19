@@ -5,6 +5,8 @@ const swaggerUi = require('swagger-ui-express');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const subCategoryRoutes = require('./routes/subCategoryRoutes');
 const app = express();
 const PORT = 3000;
 
@@ -65,6 +67,8 @@ app.use(
 app.use(userRoutes);
 app.use(authRoutes);
 app.use(productRoutes);
+app.use(categoryRoutes);
+app.use(subCategoryRoutes);
 
 app.listen(PORT, '0.0.0.0', (err) => {
     err ? console.log(err) : console.log(`Listening on port ${PORT}`);

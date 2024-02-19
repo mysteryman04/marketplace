@@ -1,34 +1,40 @@
 // routes/categoryRoutes.js
 
+
 /**
  * @swagger
  * components:
  *   schemas:
- *     Category:
+ *     SubCategory:
  *       type: object
  *       required:
  *         - id
  *         - name
+ *         - categoryId
  *       properties:
  *         id:
  *           type: string
+ *           description: The id of the sub category
  *         name:
  *           type: string
- *           description: The title of the product
- *     CategoryDto:
+ *           description: The title of the sub category
+ *         categoryId:
+ *            type: string
+ *            description: The category of the sub category
+ *     SubCategoryDto:
  *       type: object
  *       required:
  *         - name
+ *         - categoryId
  *       properties:
  *         name:
  *           type: string
  *           description: The name of the category
+ *         categoryId:
+ *           type: string
+ *           description: The category of the sub category
  *     Response:
  *       type: object
- *       required:
- *         - data
- *         - message
- *         - status
  *       properties:
  *         data:
  *           type: object
@@ -36,63 +42,63 @@
  *         message:
  *           type: string
  *           description: The error message
- *         status:
+ *         statusCode:
  *           type: string
- *           description: The password of User
+ *           description: The status code of the response
  */
 /**
  * @swagger
  * tags:
- *   name: Category
- *   description: The category managing API
- * /category/list:
+ *   - name: Sub-Category
+ *     description: The sub-category managing API
+ * /sub-category/list/{categoryId}:
  *   get:
- *     summary: Lists all the categories by query
- *     tags: [Category]
+ *     summary: Lists all the sub-categories by query
+ *     tags: [Sub-Category]
  *     parameters:
- *       - in: query
- *         name: name
+ *       - in: path
+ *         name: categoryId
  *         schema:
  *           type: string
- *         required: false
- *         description: The title of the category
+ *         required: true
+ *         description: The sub-category of the sub-category
  *     responses:
  *       200:
- *         description: The list of the Categories
+ *         description: The list of the sub-categories by category
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
  *
- * /category/{id}:
+ * /sub-category/{id}:
  *   get:
- *     summary: Get the category by id
- *     tags: [Category]
+ *     summary: Get the sub-category by id
+ *     tags: [Sub-Category]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the category
+ *         description: The ID of the sub-category
  *     responses:
  *       200:
- *         description: The category by id
+ *         description: The sub-category by id
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
- * /category/delete/{id}:
+ * /sub-category/delete/{id}:
  *   delete:
- *     summary: Remove the category by id
- *     tags: [Category]
+ *     summary: Remove the sub-category by id
+ *     tags: [Sub-Category]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the category
+ *         description: The ID of the sub-category
  *     responses:
  *       200:
  *         description: null
@@ -101,56 +107,56 @@
  *             schema:
  *               $ref: '#/components/schemas/Response'
  *
- * /category/create:
+ * /sub-category/create:
  *   post:
  *     summary: Create a new category
- *     tags: [Category]
+ *     tags: [Sub-Category]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CategoryDto'
+ *             $ref: '#/components/schemas/SubCategoryDto'
  *     responses:
  *       '200':
- *         description: The category was successfully created
+ *         description: The sub-category was successfully created
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
  *       '400':
- *         description: The category was not created
+ *         description: The sub-category was not created
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
  *
- * /category/update/{id}:
+ * /sub-category/update/{id}:
  *   put:
- *     summary: Update the category by id
- *     tags: [Category]
+ *     summary: Update the sub-category by id
+ *     tags: [Sub-Category]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the category
+ *         description: The ID of the sub-category
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CategoryDto'
+ *             $ref: '#/components/schemas/SubCategoryDto'
  *     responses:
  *       '200':
- *         description: The category was successfully updated
+ *         description: The sub-category was successfully updated
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
  *       '400':
- *         description: The category was not updated
+ *         description: The sub-category was not updated
  *         content:
  *           application/json:
  *             schema:
@@ -158,23 +164,18 @@
  */
 
 
-
-
-
-
-
-
 const express = require('express');
 const router = express.Router();
-const categoryController = require('../controllers/categoryController');
+const subcategoryController = require('../controllers/subCategoryController');
 const adminMiddleware = require('../middleware/AdminMiddleware');
 
 
-router.post('/category/create', adminMiddleware.authenticateToken,  categoryController.createCategory);
-router.get('/category/list',adminMiddleware.authenticateToken, categoryController.getAllCategories);
-router.get('/category/:id',adminMiddleware.authenticateToken, categoryController.getCategoryById);
-router.put('/category/:id',adminMiddleware.authenticateToken, categoryController.updateCategory);
-router.delete('/category/:id', adminMiddleware.authenticateToken,categoryController.deleteCategory);
+router.post('/sub-category/create', adminMiddleware.authenticateToken,  subcategoryController.createSubCategory);
+router.get('/sub-category/:id',adminMiddleware.authenticateToken, subcategoryController.getSubCategoryById);
+router.put('/sub-category/update/:id',adminMiddleware.authenticateToken, subcategoryController.updateSubCategory);
+router.delete('/sub-category/:id', adminMiddleware.authenticateToken,subcategoryController.deleteSubCategory);
+router.get('/sub-category/list/:categoryId',adminMiddleware.authenticateToken, subcategoryController.getSubCategoryByCategoryId);
+
 // Add other routes as needed
 
 module.exports = router;
