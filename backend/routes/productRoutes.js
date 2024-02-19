@@ -47,7 +47,7 @@
  *         userId:
  *           type: string
  *           description: The ID of the user who created the product
- *     ProductCreateDto:
+ *     ProductDto:
  *       type: object
  *       required:
  *         - title
@@ -55,7 +55,7 @@
  *         - amount
  *         - currency
  *         - categoryId
- *         - imageUrl
+ *         - imageUrls
  *       properties:
  *         title:
  *           type: string
@@ -72,9 +72,12 @@
  *         categoryId:
  *            type: string
  *            description: The category of the product
- *         imageUrl:
- *            type: string
- *            description: The image url of the product
+ *         imageUrls:
+ *            type: array
+ *            items:
+ *               type: string
+ *               description: The image url of the product
+ *            description: The image urls of the product
  *     Response:
  *       type: object
  *       required:
@@ -201,6 +204,68 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
+ *
+ * /product/create/{userId}:
+ *   post:
+ *     summary: Create a new product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ProductDto'
+ *     responses:
+ *       '200':
+ *         description: The product was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Response'
+ *       '400':
+ *         description: The product was not created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Response'
+ *
+ * /product/update/{id}:
+ *   put:
+ *     summary: Update the product by id
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the product
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ProductDto'
+ *     responses:
+ *       '200':
+ *         description: The product was successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Response'
+ *       '400':
+ *         description: The product was not updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Response'
  */
 
 
@@ -213,8 +278,8 @@ const sellerMiddleware = require('../middleware/SellerMiddleware');
 router.get('/product/list', authMiddleware.authenticateToken, productController.getAllProducts);
 router.get('/product/list/:userId', authMiddleware.authenticateToken,sellerMiddleware.authenticateToken,productController.getAllProductsForSeller);
 router.get('/product/:id', authMiddleware.authenticateToken, productController.getProductById);
-router.post('product/create/:userId', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.createProduct);
-router.put('product/update/:id', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.updateProduct);
+router.post('/product/create/:userId', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.createProduct);
+router.put('/product/update/:id', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.updateProduct);
 router.delete('/product/delete/:id', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.deleteProduct);
 
 module.exports = router;

@@ -12,7 +12,7 @@ const productSchema = new Schema({
         require: false,
     },
     userId: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Users',
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
         required: true
     },
     createdData: {
@@ -23,10 +23,10 @@ const productSchema = new Schema({
         type: Date,
         require: true,
     },
-    imageUrl: {
+    imageUrls: [{
         type: String,
         require: false,
-    },
+    }],
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
@@ -47,5 +47,5 @@ const productSchema = new Schema({
     }]},
     { versionKey: false});
 
-const Product = mongoose.model('Products', productSchema);
+const Product = mongoose.model('Product', productSchema);
 module.exports = Product;

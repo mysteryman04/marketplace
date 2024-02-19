@@ -13,6 +13,6 @@ const userSchema = new mongoose.Schema(
     { versionKey: false } // Disable the version key (__v)
 );
 
-const User = mongoose.model('Users', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

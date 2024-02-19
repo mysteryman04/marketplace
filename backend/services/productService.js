@@ -62,14 +62,14 @@ const createProduct = async (userId, product) =>{
             title: product.title,
             description: product.description,
             price: {
-                amount: product.price.amount,
-                currency: product.price.currency,
+                amount: product.amount,
+                currency: product.currency,
             },
             categoryId: product.categoryId,
             userId: userId,
             createdData: new Date(),
             updatedData: new Date(),
-            imageUrl: product.imageUrl,
+            imageUrls: product.imageUrls,
             reviews: [],
         });
         return await ProductModel.create(product);
@@ -81,21 +81,21 @@ const createProduct = async (userId, product) =>{
 
 // Update product for seller
 
-const updateProduct = async (id, product) =>{
+const updateProduct = async (id, newProduct) =>{
      try{
          const product = await ProductModel.findOne({id});
          if (!product) {
              throw new Error('Product not found');
          }
-            product.title = product.title;
-            product.description = product.description;
+            product.title = newProduct.title;
+            product.description = newProduct.description;
             product.price = {
-                amount: product.price.amount,
-                currency: product.price.currency,
+                amount: newProduct.amount,
+                currency: newProduct.currency,
             };
-            product.categoryId = product.categoryId;
+            product.categoryId = newProduct.categoryId;
             product.updatedData = new Date();
-            product.imageUrl = product.imageUrl;
+            product.imageUrls = newProduct.imageUrls;
             return await product.save();
      }
      catch (error) {
