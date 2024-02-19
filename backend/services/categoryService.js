@@ -1,21 +1,42 @@
-// services/categoryService.js
-const Category = require('../models/category');
+const Category = require('../models/categoryModel');
 
-async function createCategory(categoryData) {
-    // Add logic to create a new category
-    const newCategory = new Category(categoryData);
-    return await newCategory.save();
+async function createCategory({name}) {
+    const newCategory = new Category({name});
+    return Category.create(newCategory);
 }
 
 async function getAllCategories() {
-    // Add logic to retrieve all categories
-    return await Category.find();
+    return Category.find();
 }
 
-// Add other CRUD operations as needed
+async function getCategoryById(id) {
+    const category = await Category.findById(id);
+    if(!category) {
+        throw new Error('Category not found');
+    }
+    return category;
+}
 
+async function updateCategory(id, newName) {
+    const category = await getCategoryById(id);
+    if(!category) {
+        throw new Error('Category not found');
+    }
+    category.name = newName;
+    return category.save();
+}
+
+async function deleteCategory(id) {
+    const category = await getCategoryById(id);
+    if(!category) {
+        throw new Error('Category not found');
+    }
+    return category.delete();
+}
 module.exports = {
     createCategory,
     getAllCategories,
-    // Add other service functions here
+    getCategoryById,
+    updateCategory,
+    deleteCategory
 };
