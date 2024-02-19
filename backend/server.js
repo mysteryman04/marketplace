@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const subCategoryRoutes = require('./routes/subCategoryRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const app = express();
 const PORT = 3000;
 
@@ -69,6 +70,7 @@ app.use(authRoutes);
 app.use(productRoutes);
 app.use(categoryRoutes);
 app.use(subCategoryRoutes);
+app.use(cartRoutes);
 
 app.listen(PORT, '0.0.0.0', (err) => {
     err ? console.log(err) : console.log(`Listening on port ${PORT}`);

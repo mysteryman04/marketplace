@@ -1,56 +1,46 @@
-const CartService = require('../services/cartService');
+const cartService = require('../services/cartService');
 const response = require('../utils/Response');
-const e = require("express");
 
-const getCartByUserId = async (req, res) => {
-    try {
-        const cartId = req.params.id;
-        const cart = await CartService.getCartByUserId(userId);
-        res.status(200).json(response.Success(cart));
-    } catch (error) {
-        console.error(error);
-        res.status(200).send(response.Error('Error'));
-    }
-};
 
-const createCart = async (req, res) => {
-    try {
-        const cartData = req.body;
-        const newCart = await CartService.createCart(cartData);
-        res.status(200).json(response.Success(newCart));
-    } catch (error) {
-        console.error(error);
-        res.status(200).json(response.Error('Error'));
+const getAllProductsInCart = async (req, res) => {
+    try{
+        const userId = req.params.userId;
+        const result = await cartService.getAllProductsInCart(userId);
+        res.status(200).json(response.Success(result));
     }
-};
+    catch(error){
+        res.status(400).json(response.Error(error.message));
+    }
+}
 
-const updateCartByUserId = async (req, res) => {
-    try {
-        const cartId = req.params.id;
-        const cartData = req.body;
-        const updateCart = await CartService.updateCartByUserId(cartId, cartData);
-        res.status(200).json(response.Success(updateCart));
-    } catch (error) {
-        console.error(error);
-        res.status(200).json(response.Error('Error'));
+const addProductToCart = async (req, res) => {
+    try{
+        const userId = req.params.userId;
+        const productId = req.body.productId;
+        const quantity = req.body.quantity;
+        const result = await cartService.addProductToCart(userId, productId, quantity);
+        res.status(200).json(response.Success(result));
     }
-};
+    catch(error){
+        res.status(400).json(response.Error(error.message));
+    }
+}
 
-const deleteCartByUserId = async (req, res) => {
-    try {
-        const cartData = req.body;
-        const cartId = req.params.id;
-        const deleteCart = await CartService.deleteCartByUserId(userId, cartData);
-        res.status(200).json(response.Success(deleteCart));
-    } catch (error) {
-        console.error(error);
-        res.status(200).json(response.Error('Error'));
+const removeProductFromCart = async (req, res) => {
+    try{
+        const userId = req.params.userId;
+        const productId = req.body.productId;
+        const quantity = req.body.quantity;
+        const result = await cartService.removeProductFromCart(userId, productId, quantity);
+        res.status(200).json(response.Success(result));
     }
-};
+    catch(error){
+        res.status(400).json(response.Error(error.message));
+    }
+}
 
 module.exports = {
-    getCartByUserId,
-    createCart,
-    updateCartByUserId,
-    deleteCartByUserId,
+    getAllProductsInCart,
+    addProductToCart,
+    removeProductFromCart
 }

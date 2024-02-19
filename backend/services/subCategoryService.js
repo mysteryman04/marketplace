@@ -1,7 +1,11 @@
 const subCategoryModel = require('../models/subCategoryModel');
-
+const categoryService = require('../services/categoryService');
 const createSubCategory = async (name,categoryId) => {
       try {
+          const category = await categoryService.getCategoryById(categoryId);
+          if (!category) {
+                throw new Error('Category not found');
+          }
           const newSubCategory = new subCategoryModel({name,categoryId});
           return subCategoryModel.create(newSubCategory);
       }
@@ -38,6 +42,10 @@ const updateSubCategory = async (id, newName,categoryId) => {
         const subCategory = await getSubCategoryById(id);
         if (!subCategory) {
             throw new Error('SubCategory not found');
+        }
+        const category = await categoryService.getCategoryById(categoryId);
+        if (!category) {
+            throw new Error('Category not found');
         }
         subCategory.name = newName;
         subCategory.categoryId = categoryId;
