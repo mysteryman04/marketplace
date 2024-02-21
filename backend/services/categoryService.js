@@ -14,7 +14,6 @@ async function getCategoryById(id) {
     if(!category) {
         throw new Error('Category not found');
     }
-    category.subCategories = await category.populate('subCategories').execPopulate();
     return category;
 }
 
