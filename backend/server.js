@@ -56,7 +56,7 @@ const options = {
         security: [{ bearerAuth: [] }],
         servers: [
             {
-                url: "http://localhost:3000/",
+                url: "http://185.22.65.85:3000/",
             },
         ],
     },
