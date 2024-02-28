@@ -59,6 +59,17 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+const getLatestProducts = async (req, res) => {
+    try {
+        const categoryId = req.query.categoryId;
+        const products = await productServices.getLatestProducts(categoryId);
+        res.status(200).json(response.Success(products));
+    }
+    catch (error) {
+        res.status(400).json(response.Error(error.message));
+    }
+}
+
 
 module.exports = {
     getAllProducts,
@@ -66,5 +77,6 @@ module.exports = {
     getProductById,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getLatestProducts
 };

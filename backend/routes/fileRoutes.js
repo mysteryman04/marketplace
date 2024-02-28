@@ -75,8 +75,8 @@ const authMiddleware = require('../middleware/AuthMiddleware');
  * */
 
 
-router.post('/file/upload', upload.single('file'), authMiddleware.authenticateToken,  fileController.uploadFile);
-router.get('/file/:fileName', authMiddleware.authenticateToken, fileController.getFile);
+router.post('/file/upload', upload.single('file'),   fileController.uploadFile);
+router.get('/file/:fileName', fileController.getFile);
 
 module.exports = router;
 

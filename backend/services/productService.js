@@ -1,5 +1,6 @@
 const ProductModel = require('../models/productModel');
-
+const SubCategoryModel = require('../models/subCategoryModel');
+const userModel = require('../models/userModel');
 // Get all products for buyers
 const getAllProducts = async ({title,data,categoryId, minPrice, maxPrice, currency}) =>{
     const filter = {};
@@ -44,7 +45,7 @@ const getAllProductsForSeller = async (userId) =>{
 // Get product by id
 const getProductById = async (id) =>{
     try{
-        const product = await ProductModel.findOne({id:id});
+        const product = await ProductModel.findOne({_id:id});
         if (!product) {
             throw new Error('Product not found');
         }
@@ -56,20 +57,24 @@ const getProductById = async (id) =>{
 }
 
 // Create product for seller
-const createProduct = async (userId, product) =>{
+const createProduct = async (userId, newProduct) =>{
     try{
+        const user = await userModel.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
         const product = new ProductModel({
-            title: product.title,
-            description: product.description,
+            title: newProduct.title,
+            description: newProduct.description,
             price: {
-                amount: product.amount,
-                currency: product.currency,
+                amount: newProduct.amount,
+                currency: newProduct.currency,
             },
-            categoryId: product.categoryId,
+            subCategoryId: newProduct.subCategoryId,
             userId: userId,
             createdData: new Date(),
             updatedData: new Date(),
-            imageUrls: product.imageUrls,
+            imageUrls: newProduct.imageUrls,
             reviews: [],
         });
         return await ProductModel.create(product);
@@ -113,11 +118,26 @@ const deleteProduct = async (id) => {
     }
 }
 
+const getLatestProducts = async (categoryId) =>{
+    try {
+        if (!categoryId) {
+            return await ProductModel.find().sort({createdDate: -1}).limit(20);
+        }
+        const subCategories = await SubCategoryModel.find({categoryId});
+        const subCategoryIds = subCategories.map(subCategory => subCategory.id);
+        return await ProductModel.find({subCategoryId: {$in: subCategoryIds}}).sort({createdDate: -1}).limit(20);
+    }
+    catch (error) {
+        throw new Error(error);
+    }
+}
+
 module.exports = {
     getAllProducts,
     getAllProductsForSeller,
     getProductById,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getLatestProducts
 }

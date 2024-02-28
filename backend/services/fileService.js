@@ -12,7 +12,7 @@ const bucketName = 'ems';
 
 const uploadFile = async (file,path) => {
     const metaData = {
-        'Content-Type': file.mimetype
+        'Content-Type': file.mimetype,
     };
     let fileName = new Date().getTime() + file.originalname;
     minioClient.fPutObject(bucketName, fileName, path, metaData, function(err, etag) {
@@ -23,28 +23,7 @@ const uploadFile = async (file,path) => {
     return fileName;
 }
 
-async function getFileFromMinio(fileName) {
-    return new Promise((resolve, reject) => {
-        minioClient.getObject(bucketName, fileName, (err, stream) => {
-            if (err) {
-                reject(err);
-            } else {
-                let fileData = '';
-                stream.on('data', (chunk) => {
-                    fileData += chunk;
-                });
-                stream.on('end', () => {
-                    resolve(fileData);
-                });
-                stream.on('error', (error) => {
-                    reject(error);
-                });
-            }
-        });
-    });
-}
 
 module.exports = {
-    uploadFile,
-    getFileFromMinio
+    uploadFile
 }

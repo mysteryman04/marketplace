@@ -10,7 +10,7 @@
  *         - description
  *         - amount
  *         - currency
- *         - categoryId
+ *         - subCategoryId
  *         - imageUrl
  *         - createdDate
  *         - updatedDate
@@ -30,9 +30,9 @@
  *         currency:
  *           type: string
  *           description: The currency of the product
- *         categoryId:
+ *         subCategoryId:
  *           type: string
- *           description: The category of the product
+ *           description: The sub-category of the product
  *         imageUrl:
  *           type: string
  *           description: The image url of the product
@@ -54,7 +54,7 @@
  *         - description
  *         - amount
  *         - currency
- *         - categoryId
+ *         - subCategoryId
  *         - imageUrls
  *       properties:
  *         title:
@@ -69,9 +69,9 @@
  *         currency:
  *            type: string
  *            description: The currency of the product
- *         categoryId:
+ *         subCategoryId:
  *            type: string
- *            description: The category of the product
+ *            description: The sub-category  of the product
  *         imageUrls:
  *            type: array
  *            items:
@@ -149,7 +149,24 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
- *
+ * /product/list-latest:
+ *   get:
+ *     summary: Lists all the latest products
+ *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: categoryId
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: The ID of the category
+ *     responses:
+ *       200:
+ *         description: The list of the Products
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Response'
  * /product/list/{userId}:
  *   get:
  *     summary: Lists all the products for the seller
@@ -266,6 +283,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Response'
+ *
+ *
  */
 
 
@@ -275,11 +294,12 @@ const productController = require('../controllers/productController');
 const authMiddleware = require('../middleware/AuthMiddleware');
 const sellerMiddleware = require('../middleware/SellerMiddleware');
 
-router.get('/product/list', authMiddleware.authenticateToken, productController.getAllProducts);
-router.get('/product/list/:userId', authMiddleware.authenticateToken,sellerMiddleware.authenticateToken,productController.getAllProductsForSeller);
-router.get('/product/:id', authMiddleware.authenticateToken, productController.getProductById);
-router.post('/product/create/:userId', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.createProduct);
-router.put('/product/update/:id', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.updateProduct);
-router.delete('/product/delete/:id', authMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.deleteProduct);
+router.get('/product/list', productController.getAllProducts);
+router.get('/product/list-latest', productController.getLatestProducts);
+router.get('/product/list/:userId',productController.getAllProductsForSeller);
+router.get('/product/:id', productController.getProductById);
+router.post('/product/create/:userId',  productController.createProduct);
+router.put('/product/update/:id',  sellerMiddleware.authenticateToken, productController.updateProduct);
+router.delete('/product/delete/:id', sellerMiddleware.authenticateToken, productController.deleteProduct);
 
 module.exports = router;

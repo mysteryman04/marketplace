@@ -27,11 +27,12 @@ async function updateCategory(id, newName) {
 }
 
 async function deleteCategory(id) {
-    const category = await getCategoryById(id);
-    if(!category) {
+    try {
+        return Category.findByIdAndDelete(id);
+    }
+    catch (error) {
         throw new Error('Category not found');
     }
-    return category.delete();
 }
 module.exports = {
     createCategory,

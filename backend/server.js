@@ -9,11 +9,15 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const subCategoryRoutes = require('./routes/subCategoryRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const fileRoutes = require('./routes/fileRoutes');
+const cors = require('cors');
+const bodyParser = require("body-parser");
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // MongoDB connection
 const mongoURL = 'mongodb+srv://mystery_dev:backend123@cluster0.liwzter.mongodb.net/FinalBackEnd?retryWrites=true&w=majority'; // Update with your MongoDB URL
 mongoose

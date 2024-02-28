@@ -17,6 +17,7 @@ const updateUserById = async (userId, userData) => {
     const user = await UserModel.findById(userId);
     user.name = userData.name;
     user.password = userData.password;
+    user.type = userData.type;
     return user.save();
 };
 
