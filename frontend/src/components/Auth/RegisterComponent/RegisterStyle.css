@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.register-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  flex-direction: column;
+}
+.register-container form {
+  width: 600px;
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fdfdfd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+.register-container form input[type=text], .register-container form input[type=password] {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 400px;
+  transition: 0.3s;
+}
+.register-container form input[type=text]:focus, .register-container form input[type=password]:focus {
+  border-color: #000;
+}
+.register-container form button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  width: 100px;
+  margin-top: 10px;
+}
+.register-container form button:hover {
+  background-color: #e2e2e2;
+}
+.register-container form h1 {
+  margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+}
+.register-container form label {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+}
+.register-container form p {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: #605e5e;
+  margin-top: 10px;
+}
+.register-container form p span {
+  text-decoration: none;
+  color: #988383;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.register-container form p span:hover {
+  color: #000;
+}
+
+/*# sourceMappingURL=RegisterStyle.css.map */
