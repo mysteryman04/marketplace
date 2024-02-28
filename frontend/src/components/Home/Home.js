@@ -4,17 +4,10 @@ import ImageCarousel from "../Carousel/Carousel";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import LatestProduct from "../LatestProduct/LatestProduct";
-import {useSelector} from "react-redux";
-import MainProductModal from "../ProductModal/ProductModal";
 
 function Home(){
     const [categories, setCategories] = useState([]);
     const [latestProducts, setLatestProducts] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const isProductDetailsOpen = useSelector((state) => state.products.isOpen);
-    const selectedProductId = useSelector((state) => state.products.selectedProductId);
-    console.log(isProductDetailsOpen);
-    console.log(selectedProductId);
     useEffect( () => {
         axios.get(categoryUrl).then((res) =>{
             if(res.data.status){
@@ -47,7 +40,7 @@ function Home(){
                 <div className="sortings">
                     {
                         categories.map((category) => {
-                            return <p onClick={() => setSelectedCategory(category._id) } key={category._id} >{category.name}</p>
+                            return <p key={category._id} >{category.name}</p>
                         })
                     }
                 </div>
@@ -59,9 +52,6 @@ function Home(){
                     }
                 </div>
             </div>
-            {
-                isProductDetailsOpen ? <MainProductModal productId={selectedProductId}/> : null
-            }
         </div>
     )
 }

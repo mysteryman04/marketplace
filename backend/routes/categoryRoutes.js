@@ -170,10 +170,10 @@ const categoryController = require('../controllers/categoryController');
 const adminMiddleware = require('../middleware/AdminMiddleware');
 
 
-router.post('/category/create',   categoryController.createCategory);
-router.get('/category/list', categoryController.getAllCategories);
-router.get('/category/:id', categoryController.getCategoryById);
-router.put('/category/:id', categoryController.updateCategory);
+router.post('/category/create', adminMiddleware.authenticateToken,  categoryController.createCategory);
+router.get('/category/list', adminMiddleware.authenticateToken,categoryController.getAllCategories);
+router.get('/category/:id', adminMiddleware.authenticateToken,categoryController.getCategoryById);
+router.put('/category/:id',adminMiddleware.authenticateToken, categoryController.updateCategory);
 router.delete('/category/delete/:id', adminMiddleware.authenticateToken,categoryController.deleteCategory);
 // Add other routes as needed
 

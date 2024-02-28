@@ -18,8 +18,8 @@
   box-shadow: 0 0 10px 0 #5d3e47;
 }
 .item img {
-  width: 60%;
-  height: 60%;
+  width: 80%;
+  height: 80%;
   object-fit: cover;
 }
 .item p {
