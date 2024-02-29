@@ -294,10 +294,10 @@ const productController = require('../controllers/productController');
 const authMiddleware = require('../middleware/AuthMiddleware');
 const sellerMiddleware = require('../middleware/SellerMiddleware');
 
-router.get('/product/list', sellerMiddleware.authenticateToken, productController.getAllProducts);
-router.get('/product/list-latest',sellerMiddleware.authenticateToken, productController.getLatestProducts);
-router.get('/product/list/:userId',sellerMiddleware.authenticateToken,productController.getAllProductsForSeller);
-router.get('/product/:id',sellerMiddleware.authenticateToken, productController.getProductById);
+router.get('/product/list',  productController.getAllProducts);
+router.get('/product/list-latest', productController.getLatestProducts);
+router.get('/product/list/:userId',productController.getAllProductsForSeller);
+router.get('/product/:id', productController.getProductById);
 router.post('/product/create/:userId',sellerMiddleware.authenticateToken,  productController.createProduct);
 router.put('/product/update/:id', sellerMiddleware.authenticateToken, sellerMiddleware.authenticateToken, productController.updateProduct);
 router.delete('/product/delete/:id', sellerMiddleware.authenticateToken,sellerMiddleware.authenticateToken, productController.deleteProduct);

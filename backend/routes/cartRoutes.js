@@ -133,7 +133,7 @@ const cartController = require('../controllers/cartController');
 const consumerMiddleware = require('../middleware/ConsumerMiddleware');
 
 
-router.get('/cart/list/:userId',consumerMiddleware.authenticateToken, cartController.getAllProductsInCart);
+router.get('/cart/list/:userId', cartController.getAllProductsInCart);
 router.post('/cart/create/:userId',consumerMiddleware.authenticateToken, cartController.addProductToCart);
 router.delete('/cart/delete/:userId', consumerMiddleware.authenticateToken,cartController.removeProductFromCart);
 module.exports=router;
