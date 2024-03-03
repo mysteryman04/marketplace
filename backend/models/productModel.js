@@ -23,10 +23,20 @@ const productSchema = new Schema({
         type: Date,
         require: true,
     },
-    imageUrls: [{
-        type: String,
-        require: false,
-    }],
+    image: {
+        urls : [
+            {
+                type: String,
+                required: true,
+            }
+        ],
+        name : [
+            {
+                type: String,
+                required: true,
+            }
+        ]
+    },
     subCategoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategory',

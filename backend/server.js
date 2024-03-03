@@ -58,6 +58,9 @@ const options = {
             {
                 url: "http://185.22.65.85:3000/",
             },
+            {
+                url: "http://localhost:3000/",
+            }
         ],
     },
     apis: ["./routes/*.js"],

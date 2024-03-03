@@ -74,7 +74,7 @@ const createProduct = async (userId, newProduct) =>{
             userId: userId,
             createdData: new Date(),
             updatedData: new Date(),
-            imageUrls: newProduct.imageUrls,
+            image: newProduct.image,
             reviews: [],
         });
         return await ProductModel.create(product);
@@ -100,7 +100,7 @@ const updateProduct = async (id, newProduct) =>{
             };
             product.categoryId = newProduct.categoryId;
             product.updatedData = new Date();
-            product.imageUrls = newProduct.imageUrls;
+            product.image = newProduct.image;
             return await product.save();
      }
      catch (error) {

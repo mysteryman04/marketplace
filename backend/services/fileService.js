@@ -15,12 +15,10 @@ const uploadFile = async (file,path) => {
         'Content-Type': file.mimetype,
     };
     let fileName = new Date().getTime() + file.originalname;
-    minioClient.fPutObject(bucketName, fileName, path, metaData, function(err, etag) {
-        if (err) {
-            throw new Error(err);
-        }
-    });
-    return fileName;
+    await minioClient.fPutObject(bucketName, fileName, path, metaData);
+    const url = await minioClient.presignedGetObject(bucketName, fileName);
+    const finalUrl = new URL(url, `https://ems-${fileName}`).href
+    return {fileName, url: finalUrl};
 }
 
 

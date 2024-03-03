@@ -11,7 +11,7 @@
  *         - amount
  *         - currency
  *         - subCategoryId
- *         - imageUrl
+ *         - image
  *         - createdDate
  *         - updatedDate
  *         - userId
@@ -33,9 +33,19 @@
  *         subCategoryId:
  *           type: string
  *           description: The sub-category of the product
- *         imageUrl:
- *           type: string
- *           description: The image url of the product
+ *         image:
+ *           type: object
+ *           properties:
+ *              urls:
+ *                  type: array
+ *                  items:
+ *                      type: string
+ *                      description: The image url of the product
+ *              name:
+ *                  type: array
+ *                  items:
+ *                      type: string
+ *                      description: The image name of the product
  *         createdDate:
  *           type: string
  *           format: date-time
@@ -55,7 +65,7 @@
  *         - amount
  *         - currency
  *         - subCategoryId
- *         - imageUrls
+ *         - image
  *       properties:
  *         title:
  *           type: string
@@ -72,12 +82,19 @@
  *         subCategoryId:
  *            type: string
  *            description: The sub-category  of the product
- *         imageUrls:
- *            type: array
- *            items:
- *               type: string
- *               description: The image url of the product
- *            description: The image urls of the product
+ *         image:
+ *            type: object
+ *            properties:
+ *               urls:
+ *                   type: array
+ *                   items:
+ *                       type: string
+ *                       description: The image url of the product
+ *               name:
+ *                   type: array
+ *                   items:
+ *                       type: string
+ *                       description: The image name of the product
  *     Response:
  *       type: object
  *       required:
